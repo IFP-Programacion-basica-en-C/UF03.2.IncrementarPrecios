@@ -37,7 +37,7 @@ int main()
 
 	FILE *f;
 
-	f = fopen("precios.txt", "w");
+	f = fopen("precios.txt", "r");
 
 	if (f == NULL)
 	{
@@ -46,7 +46,7 @@ int main()
 	else
 	{
 		printf("*******BIENVENIDO AL INCREMENTADOR AUTOMATICO DE PRECIOS*******\n\n");
-		pideNumEntreRango(1, 20);
+		int incremento = pideNumEntreRango(1, 20);
 		importarDatos(f, vPrecios, &numE);
 		incrementarPrecios(vPrecios, numE, incremento);
 		exportarDatos(vPrecios, numE);
@@ -59,7 +59,7 @@ int main()
 	return 0;
 }
 
-pideNumEntreRango(int min, int max)
+int pideNumEntreRango(int min, int max)
 {
 
 	int num;
@@ -81,9 +81,8 @@ void importarDatos(FILE *f, float vPrecios[], int *numE)
 	while (feof(f) == 0)
 	{
 
-		fgets(precios, MAXCADENA, f);
-		vPrecios[i] = atof(precios);
-		i++;
+		fscanf(f, "%f", &vPrecios[*numE]);
+		(*numE)++;
 	}
 	(*numE) = i;
 	rewind(f);
@@ -91,8 +90,7 @@ void importarDatos(FILE *f, float vPrecios[], int *numE)
 
 void incrementarPrecios(float vPrecios[], int numE, int incremento)
 {
-	printf("Introduce un numero entre 1 y 20: ");
-	scanf("%d", incremento);
+	
 
 	for (int i = 0; i < numE; i++)
 	{
@@ -114,7 +112,7 @@ void exportarDatos(float vPrecios[], int numE)
 		for (int i = 0; i < numE; i++)
 	{
 		
-		fprintf("%f", vPrecios[i]);
+		// fprintf("%f", vPrecios[i]);
 	}
 	fclose(f2);
 	}
