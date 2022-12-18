@@ -75,8 +75,8 @@ int pideNumEntreRango(int min, int max)
 void importarDatos(FILE *f, float vPrecios[], int *numE)
 {
 
-	int i = 0;
-	float precios[10];
+	// int i = 0;
+	// float precios[MAXCADENA];
 
 	while (feof(f) == 0)
 	{
@@ -84,7 +84,7 @@ void importarDatos(FILE *f, float vPrecios[], int *numE)
 		fscanf(f, "%f", &vPrecios[*numE]);
 		(*numE)++;
 	}
-	(*numE) = i;
+	
 	rewind(f);
 }
 
