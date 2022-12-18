@@ -53,7 +53,6 @@ int main()
 		fclose(f);
 	}
 
-
 	getch();
 
 	return 0;
@@ -75,22 +74,26 @@ int pideNumEntreRango(int min, int max)
 void importarDatos(FILE *f, float vPrecios[], int *numE)
 {
 
-	// int i = 0;
-	// float precios[MAXCADENA];
+	int i = 0;
+	float preciosAux[MAXCADENA];
+	printf("Pulse una tecla para empezar a importar los datos.\n");
+	getch();
 
 	while (feof(f) == 0)
 	{
 
-		fscanf(f, "%f", &vPrecios[*numE]);
-		(*numE)++;
+		fgets(preciosAux, MAXCADENA, f);
+		vPrecios[i] = atof(preciosAux);
+		i++;
 	}
-	
+	(*numE) = i;
+
 	rewind(f);
+	
 }
 
 void incrementarPrecios(float vPrecios[], int numE, int incremento)
 {
-	
 
 	for (int i = 0; i < numE; i++)
 	{
@@ -110,10 +113,11 @@ void exportarDatos(float vPrecios[], int numE)
 	{
 		fprintf(f2, "Listado de precios modificados:\n");
 		for (int i = 0; i < numE; i++)
-	{
-		
-		// fprintf("%f", vPrecios[i]);
-	}
-	fclose(f2);
+		{
+
+			fprintf(f2,"%f\n", vPrecios[i]);
+		}
+		fclose(f2);
+		printf("Precios incrementados importados al nuevo fichero.");
 	}
 }
